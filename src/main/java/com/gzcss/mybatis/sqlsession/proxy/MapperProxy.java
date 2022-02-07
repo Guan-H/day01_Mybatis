@@ -1,17 +1,23 @@
 package com.gzcss.mybatis.sqlsession.proxy;
 
 import com.gzcss.cfg.Mapper;
+import com.gzcss.mybatis.utils.Executor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.sql.Connection;
 import java.util.Map;
 
 public class MapperProxy implements InvocationHandler {
-
+    //map的key是全限定类名+方法名
     private Map<String, Mapper> mappers;
 
-    public MapperProxy(Map<String,Mapper> mappers){
+    private Connection conn;
+
+
+    public MapperProxy(Map<String,Mapper> mappers,Connection conn){
         this.mappers = mappers;
+        this.conn = conn;
     }
 
 
@@ -41,6 +47,6 @@ public class MapperProxy implements InvocationHandler {
         System.out.println("组成的key："+key);
 
 
-        return null;
+        return new Executor().selectList(mapper,conn);
     }
 }

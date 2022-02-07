@@ -1,5 +1,6 @@
 package com.gzcss.cfg;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Configuration {
@@ -9,7 +10,7 @@ public class Configuration {
     private String username;
     private String password;
 
-    private Map<String,Mapper> mappers;
+    private Map<String,Mapper> mappers = new HashMap<String,Mapper>();
 
     public String getDriver() {
         return driver;
