@@ -1,6 +1,7 @@
 package com.gzcss.Dao;
 
 import com.gzcss.domain.User;
+import com.gzcss.mybatis.annotations.Select;
 //import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IUserDao {
     /*
         查询所有用户
     * */
-    /*@Select("select * from user")*/
+    @Select("select * from user")
     List<User> findAll();
 
 }
