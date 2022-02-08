@@ -8,9 +8,33 @@
         select * from user
     </select>
     
-    <!-- 保存 -->
+    <!-- 保存用户 -->
     <insert id="saveUser" parameterType="com.gzcss.domain.User_crud">
         insert into user(username,birthday,sex,address)values(#{username},#{birthday},#{sex},#{address});
     </insert>
-    
+
+    <!-- 更新用户
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+    需要更新那个一个或多个参数
+        update user set address=#{address} where id=#{id}
+    -->
+    <update id="updateUser" parameterType="com.gzcss.domain.User_crud">
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+    </update>
+
+    <!-- 根据ID删除用户 -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <!-- 根据ID查找一个用户 -->
+    <select id="findOne" parameterType="java.lang.Integer" resultType="com.gzcss.domain.User_crud">
+        select * from user where id= #{id}
+    </select>
+
+    <!-- 模糊查询 -->
+    <select id="findByName" parameterType="java.lang.String" resultType="com.gzcss.domain.User_crud">
+        select * from user where username like #{username}
+    </select>
+
 </mapper>

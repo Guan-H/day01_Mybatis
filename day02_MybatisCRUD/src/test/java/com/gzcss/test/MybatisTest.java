@@ -43,6 +43,9 @@ public class MybatisTest {
 
     @After //  @After :该注解用于在测试方法(@Test)运行之后执行
     public void destroy() throws IOException {
+        //执行完后，提交事务
+        sqlSession.commit();
+        //释放资源
         sqlSession.close();
         in.close();
     }
@@ -53,6 +56,7 @@ public class MybatisTest {
     * */
     @Test
     public void testFindAll() throws IOException {
+        
         List<User_crud> list_Users = user.findAll();
         for(User_crud user_crud: list_Users ){
             System.out.println(user_crud);
@@ -68,14 +72,59 @@ public class MybatisTest {
     @Test
     public void saveUser(){
         User_crud save_user = new User_crud();
-        save_user.setUsername("飞上天");
+        save_user.setUsername("遁爆地");
         save_user.setBirthday(new Date());
         save_user.setSex("男");
         save_user.setAddress("地球");
         user.saveUser(save_user);
-        //提交事务
-        sqlSession.commit();
+
     }
+
+    /*
+     *   更新用户
+     * */
+    @Test
+    public void updateUser(){
+        User_crud save_user = new User_crud();
+        save_user.setId(51);
+        save_user.setUsername("石页");
+        save_user.setBirthday(new Date());
+        save_user.setSex("猫");
+        save_user.setAddress("猫星");
+        user.updateUser(save_user);
+        //提交事务
+    }
+
+    /*
+    *   根据ID删除用户
+    * */
+    @Test
+    public void deleteUser(){
+        user.deleteUser(52);
+    }
+
+    /*
+     *   根据ID查找一个用户
+     * */
+    @Test
+    public void findOne(){
+        User_crud one = user.findOne(51);
+        System.out.println(one);
+    }
+
+    /*
+    *   模糊查询
+    * */
+    @Test
+    public void findByName(){
+        List<User_crud> byName = user.findByName("%王%");
+        for (User_crud user : byName) {
+            System.out.println(user);
+        }
+
+
+    }
+
 
 
 }
