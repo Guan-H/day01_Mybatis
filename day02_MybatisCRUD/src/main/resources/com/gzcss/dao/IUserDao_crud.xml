@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gzcss.dao.IUserDao_crud">
+<mapper namespace="com.gzcss.dao.IUserDao_dao">
 
-    <resultMap id="userMap" type="com.gzcss.domain.User_crud">
+    <resultMap id="userMap" type="com.gzcss.domain.User_daoImpl">
         <!-- 主键类型 -->
         <id property="userId" column="id"></id>
         <!-- 非主键类型 -->
@@ -29,7 +29,7 @@
                AFTER：等insert的SQL执行完后执行
                BEFORE:insert的SQL执行前执行
     -->
-    <insert id="saveUser" parameterType="com.gzcss.domain.User_crud">
+    <insert id="saveUser" parameterType="com.gzcss.domain.User_daoImpl">
         <!-- 获取保存用户后，用户的ID值-->
         <selectKey keyColumn="id" keyProperty="userId" resultType="int" order="AFTER">
             select last_insert_id();
@@ -42,7 +42,7 @@
     需要更新那个一个或多个参数
         update user set address=#{address} where id=#{id}
     -->
-    <update id="updateUser" parameterType="com.gzcss.domain.User_crud" >
+    <update id="updateUser" parameterType="com.gzcss.domain.User_daoImpl" >
         update user set username=#{userName},birthday=#{userBirthday},sex=#{userSex},address=#{userAddress} where id=#{userId}
     </update>
 
@@ -72,7 +72,7 @@
 
 
      <!-- 测试使用QueryVo作为查询条件 -->
-    <select id="findByVo" parameterType="com.gzcss.domain.QueryVo" resultMap="userMap">
+    <select id="findByVo" parameterType="com.gzcss.domain.QueryVo_daoImpl" resultMap="userMap">
         select * from user where username like #{user.userName}
     </select>
 
