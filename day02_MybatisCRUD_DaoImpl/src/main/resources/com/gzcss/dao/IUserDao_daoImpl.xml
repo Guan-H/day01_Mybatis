@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gzcss.dao.IUserDao_dao">
+
+
+
+   <!-- 查询所有 -->
+    <select id="findAll" resultType="com.gzcss.domain.User_daoImpl">
+       <!-- select id as userId,username as userName,birthday as userBirthday,sex as userSex,address as userAddress from user*/ -->
+        select * from user
+    </select>
+    
+    <!-- 保存用户
+        keyProperty：用户实体类的ID 对应实体类的
+        keyColumn:数据库的字段ID 对应数据库表的
+        resultType：返回值类型
+        order：执行数据的时间
+               AFTER：等insert的SQL执行完后执行
+               BEFORE:insert的SQL执行前执行
+    -->
+    <insert id="saveUser" parameterType="com.gzcss.domain.User_daoImpl">
+        <!-- 获取保存用户后，用户的ID值-->
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into user(username,birthday,sex,address)values(#{username},#{birthday},#{sex},#{address});
+    </insert>
+
+    <!-- 更新用户
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+    需要更新那个一个或多个参数
+        update user set address=#{address} where id=#{id}
+    -->
+    <update id="updateUser" parameterType="com.gzcss.domain.User_daoImpl" >
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+</update>
+
+    <!-- 根据ID删除用户 -->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <!-- 根据ID查找一个用户 -->
+    <select id="findOne" parameterType="java.lang.Integer" resultType="com.gzcss.domain.User_daoImpl">
+        select * from user where id= #{id}
+    </select>
+
+    <!-- 模糊查询
+        第二种模糊查询的方式 不用在传参时写 %% 符号：
+            select * from user where username like '%${value}%'
+     -->
+    <select id="findByName" parameterType="String" resultType="com.gzcss.domain.User_daoImpl">
+        select * from user where username like #{username}
+
+    </select>
+
+    <!-- 获取用户总记录条数 -->
+    <select id="findTotal" resultType="int">
+        select count(*) from user;
+    </select>
+
+
+     <!-- 测试使用QueryVo作为查询条件 -->
+    <select id="findByVo" parameterType="com.gzcss.domain.QueryVo_daoImpl" resultType="com.gzcss.domain.QueryVo_daoImpl">
+        select * from user where username like #{user.username}
+    </select>
+
+</mapper>
