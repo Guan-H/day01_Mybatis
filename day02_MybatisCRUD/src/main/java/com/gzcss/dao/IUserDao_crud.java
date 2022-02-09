@@ -1,5 +1,6 @@
 package com.gzcss.dao;
 
+import com.gzcss.domain.QueryVo;
 import com.gzcss.domain.User_crud;
 
 import java.util.List;
@@ -38,7 +39,16 @@ public interface IUserDao_crud {
     /*
     *   模糊查询
     * */
-    List<User_crud> findByName(String name);
+    List<User_crud> findByName(String username);
 
+    /*
+    *   查找总记录条数
+    * */
+    int findTotal();
+
+    /*
+    *   根据QueryVo中的条件查询用户
+    * */
+    List<User_crud> findByVo(QueryVo vo);
 
 }
