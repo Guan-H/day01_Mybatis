@@ -1,6 +1,7 @@
 package com.gzcss.test;
 
 import com.gzcss.dao.IUserDao_crud;
+import com.gzcss.domain.QueryVo;
 import com.gzcss.domain.User_crud;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -72,12 +73,13 @@ public class MybatisTest {
     @Test
     public void saveUser(){
         User_crud save_user = new User_crud();
-        save_user.setUsername("遁爆地");
-        save_user.setBirthday(new Date());
-        save_user.setSex("男");
-        save_user.setAddress("地球");
+        save_user.setUserName("大石页");
+        save_user.setUserBirthday(new Date());
+        save_user.setUserSex("猫");
+        save_user.setUserAddress("地球");
+        System.out.println("保存之前操作："+save_user);
         user.saveUser(save_user);
-
+        System.out.println("保存之后操作："+save_user);
     }
 
     /*
@@ -86,11 +88,11 @@ public class MybatisTest {
     @Test
     public void updateUser(){
         User_crud save_user = new User_crud();
-        save_user.setId(51);
-        save_user.setUsername("石页");
-        save_user.setBirthday(new Date());
-        save_user.setSex("猫");
-        save_user.setAddress("猫星");
+        save_user.setUserId(59);
+        save_user.setUserName("小石页");
+        save_user.setUserBirthday(new Date());
+        save_user.setUserSex("猫");
+        save_user.setUserAddress("猫星");
         user.updateUser(save_user);
         //提交事务
     }
@@ -100,7 +102,7 @@ public class MybatisTest {
     * */
     @Test
     public void deleteUser(){
-        user.deleteUser(52);
+        user.deleteUser(60);
     }
 
     /*
@@ -108,7 +110,7 @@ public class MybatisTest {
      * */
     @Test
     public void findOne(){
-        User_crud one = user.findOne(51);
+        User_crud one = user.findOne(59);
         System.out.println(one);
     }
 
@@ -118,13 +120,36 @@ public class MybatisTest {
     @Test
     public void findByName(){
         List<User_crud> byName = user.findByName("%王%");
+        //第二种模糊查询的方式，传参时不需要加 %% 符号
+        //List<User_crud> byName = user.findByName("王");
         for (User_crud user : byName) {
             System.out.println(user);
+        }
+    }
+
+    /*
+     *   查询总记录数
+     * */
+    @Test
+    public void findTotal(){
+        int count = user.findTotal();
+        System.out.println("总记录数："+count);
+    }
+
+    /*
+    *   测试使用QueryVo作为查询条件
+    * */
+    @Test
+    public void findByVo(){
+        QueryVo vo = new QueryVo();
+        User_crud user_crud = new User_crud();
+        user_crud.setUserName("%王%");
+        vo.setUser(user_crud);
+        List<User_crud> byVo = user.findByVo(vo);
+        for (User_crud userCruds:byVo){
+            System.out.println(byVo);
         }
 
 
     }
-
-
-
 }
