@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="day02_MybatisCRUD" />
         <module name="day02_MybatisCRUD_DaoImpl" />
+        <module name="day02_MybatisCRUD" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -61,6 +61,7 @@ public class IUserdao_daoImpl implements IUserDao_dao {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         //调用方法实现删除
         sqlSession.delete("com.gzcss.dao.IUserDao_dao.deleteUser", id);
+
         //提交事务
         sqlSession.commit();
         //释放资源
