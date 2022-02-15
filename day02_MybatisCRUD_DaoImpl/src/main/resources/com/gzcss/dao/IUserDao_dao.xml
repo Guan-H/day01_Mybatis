@@ -66,4 +66,13 @@
         select * from user where username like #{user.username}
     </select>
 
+    <!-- 查询所有 -->
+    <select id="findUserByCondtion" resultType="com.gzcss.domain.User_daoImpl" parameterType="com.gzcss.domain.User_daoImpl">
+        <!-- select id as userId,username as userName,birthday as userBirthday,sex as userSex,address as userAddress from user*/ -->
+        select * from user where 1=1
+        <if test="username != null">
+            and username = #{username}
+        </if>
+    </select>
+
 </mapper>

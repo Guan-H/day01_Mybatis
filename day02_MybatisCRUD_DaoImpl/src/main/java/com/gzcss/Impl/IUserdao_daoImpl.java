@@ -98,4 +98,13 @@ public class IUserdao_daoImpl implements IUserDao_dao {
         return count;
     }
 
+    @Override
+    public List<User_daoImpl> findUserByCondtion(User_daoImpl user_dao) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        List<User_daoImpl> list = sqlSession.selectList("com.gzcss.dao.IUserDao_dao.findUserByCondtion",user_dao);
+        sqlSession.close();
+        return list;
+    }
+
+
 }

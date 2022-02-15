@@ -46,4 +46,6 @@ public interface IUserDao_dao {
     * */
     int findTotal();
 
+    List<User_daoImpl> findUserByCondtion(User_daoImpl user_dao);
+
 }

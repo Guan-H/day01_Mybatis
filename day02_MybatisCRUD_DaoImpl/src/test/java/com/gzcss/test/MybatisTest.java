@@ -129,4 +129,14 @@ public class MybatisTest {
     }
 
 
+    @Test
+    public void findUserByCondtion(){
+        User_daoImpl users =new User_daoImpl();
+        users.setUsername("老王");
+        List<User_daoImpl> userByCondtion = user.findUserByCondtion(users);
+        for (User_daoImpl li:userByCondtion) {
+            System.out.println(li);
+        }
+    }
+
 }
