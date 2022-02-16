@@ -4,7 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gzcss.dao.IUserDao_dao">
 
-
+    <resultMap id="userMap" type="com.gzcss.domain.User_daoImpl">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+    </resultMap>
    <!-- 查询所有 -->
     <select id="findAll" resultType="com.gzcss.domain.User_daoImpl">
        <!-- select id as userId,username as userName,birthday as userBirthday,sex as userSex,address as userAddress from user*/ -->
@@ -69,10 +72,26 @@
     <!-- 查询所有 -->
     <select id="findUserByCondtion" resultType="com.gzcss.domain.User_daoImpl" parameterType="com.gzcss.domain.User_daoImpl">
         <!-- select id as userId,username as userName,birthday as userBirthday,sex as userSex,address as userAddress from user*/ -->
-        select * from user where 1=1
-        <if test="username != null">
-            and username = #{username}
-        </if>
+        select * from user
+        <where>
+            <if test="username != null ">
+                and username = #{username}
+            </if>
+            <if test=" sex != null">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <select id="findUserids" resultType="com.gzcss.domain.User_daoImpl" parameterType="com.gzcss.domain.QueryVo_daoImpl">
+        select * from user
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in (" close= ")" item="uid" separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
     </select>
 
 </mapper>

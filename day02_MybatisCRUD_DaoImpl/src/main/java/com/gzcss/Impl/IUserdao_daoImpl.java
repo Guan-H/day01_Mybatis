@@ -106,5 +106,14 @@ public class IUserdao_daoImpl implements IUserDao_dao {
         return list;
     }
 
+    @Override
+    public List<User_daoImpl> findUserids(QueryVo_daoImpl ov) {
+        SqlSession session = sqlSessionFactory.openSession();
+        List<User_daoImpl> list = session.selectList("com.gzcss.dao.IUserDao_dao.findUserids",ov);
+        session.close();
+        return list;
+    }
+
+
 
 }

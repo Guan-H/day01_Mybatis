@@ -48,4 +48,6 @@ public interface IUserDao_dao {
 
     List<User_daoImpl> findUserByCondtion(User_daoImpl user_dao);
 
+    List<User_daoImpl> findUserids(QueryVo_daoImpl ov);
+
 }

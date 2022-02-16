@@ -15,7 +15,7 @@ public interface IUserDao {
     /*
         查询所有用户
     * */
-    @Select("select * from user")
+    /*@Select("select * from user")*/
     List<User> findAll();
 
 }

@@ -12,7 +12,7 @@
             <!-- 配置连接数据库的信息，用的是数据源(连接池) -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3307/eesy"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/eesy"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
             </dataSource>
@@ -21,7 +21,7 @@
 
     <!-- 告知MyBatis映射配置的位置 -->
     <mappers>
-        <!--<mapper resource="com/gzcss/Dao/IUserDao.xml"/>-->
-        <mapper class="com.gzcss.Dao.IUserDao"/>
+        <mapper resource="com/gzcss/Dao/IUserDao.xml"/>
+        <!--<mapper class="com.gzcss.Dao.IUserDao"/>-->
     </mappers>
 </configuration>

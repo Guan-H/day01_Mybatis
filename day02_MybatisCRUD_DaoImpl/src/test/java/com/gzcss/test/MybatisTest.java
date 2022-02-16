@@ -6,7 +6,6 @@ import com.gzcss.dao.IUserDao_dao;
 import com.gzcss.domain.QueryVo_daoImpl;
 import com.gzcss.domain.User_daoImpl;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
@@ -15,6 +14,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +22,6 @@ public class MybatisTest {
 
     private InputStream in;
     private IUserDao_dao user;
-
 
     @Before //  @Before：该注解用于在测试方法(@Test)执行之前
     public void init() throws IOException {
@@ -132,11 +131,27 @@ public class MybatisTest {
     @Test
     public void findUserByCondtion(){
         User_daoImpl users =new User_daoImpl();
-        users.setUsername("老王");
+        users.setUsername("%王%");
+        users.setSex("男");
         List<User_daoImpl> userByCondtion = user.findUserByCondtion(users);
         for (User_daoImpl li:userByCondtion) {
             System.out.println(li);
         }
+    }
+
+    @Test
+    public void findUserids(){
+        QueryVo_daoImpl ov = new QueryVo_daoImpl();
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(41);
+        list.add(42);
+        list.add(46);
+        ov.setIds(list);
+        List<User_daoImpl> userids = user.findUserids(ov);
+        for (User_daoImpl li:userids) {
+            System.out.println(li);
+        }
+
     }
 
 }
